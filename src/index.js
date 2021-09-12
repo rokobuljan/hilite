@@ -4,13 +4,16 @@ const ELS = (sel, PAR) => (PAR || document).querySelectorAll(sel);
 const ELNew = (tag, prop) => Object.assign(document.createElement(tag), prop);
 const regEscape = (str) => str.replace(/[\.*+?^${}()|[\]\\]/g, "\\$&");
 
+/**
+ * Hilite
+ * Highlight words in HTML
+ */
 class Hilite {
     constructor(selector, options) {
         Object.assign(this, {
             tag: "mark",
             className: "Hilite",
-            insensitive: true,
-            multiple: true,
+            sensitive: false,
         }, options, {
             target: EL(selector),
         });
@@ -53,7 +56,7 @@ class Hilite {
         this.unhighlight();
         this._value = v.trim();
         if (!this._value) return;
-        this._reg = new RegExp(regEscape(this._value), this.insensitive ? "ig" : "g");
+        this._reg = new RegExp(regEscape(this._value), this.sensitive ? "g" : "ig");
         this.highlight();
     }
 }
