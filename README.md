@@ -6,7 +6,7 @@ A lightweight JavaScript class to <mark>highlight</mark> words inside a HTML mar
 ## Installation
 
 ```sh
-npm i hilite
+npm i @rbuljan/hilite
 ```
 
 ## Syntax
@@ -17,18 +17,28 @@ new Hilite("selector", {options})
 
 ## Usage
 
-```js
-import {Hilite} from "@rbuljan/hilite";
+```js  
+// If you use a build tool like Vite, Webpack, etc:
+import { Hilite } from "@rbuljan/hilite";
 
-const HL = new Hilite("#target");
+// If you want to import it straight into your JS ES6 module .js file:  
+// import { Hilite } from "./node_modules/@rbuljan/hilite/src/index.js";
+
+// Instantiate:
+const HL = new Hilite("#area");
+
+// Highlight!
 HL.value = "test";
 ```
 
+HTML sample:
+
 ```html
-<div id="target">Test this <span data-test="test">TEST</span></div>
+<div id="area">
+    Highlight both Test and <span data-test="test">TEST</span>
+</div>
 ```
 
-will highlight both "Test" and "TEST".
 
 ## Options
 
@@ -63,7 +73,7 @@ To customize the style ot the highlighted elements use CSS like:
     background: gold;
 }
 ```
-or any other class you defined via the Options `className` property.
+or use any other class name you defined in the Options `className` property.
 
 ## TODO
 
