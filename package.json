@@ -1,6 +1,6 @@
 {
   "name": "@rbuljan/hilite",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Highlight text in HTML document",
   "main": "src/index.js",
   "scripts": {
