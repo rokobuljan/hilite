@@ -4,7 +4,7 @@ const ELS = (sel, PAR) => (PAR || document).querySelectorAll(sel);
 const ELNew = (tag, prop) => Object.assign(document.createElement(tag), prop);
 const regEscape = (str) => str.replace(/[\.*+?^${}()|[\]\\]/g, "\\$&");
 
-export default class Hilite {
+class Hilite {
     constructor(selector, options) {
         Object.assign(this, {
             tag: "mark",
@@ -57,3 +57,5 @@ export default class Hilite {
         this.highlight();
     }
 }
+
+export { Hilite }

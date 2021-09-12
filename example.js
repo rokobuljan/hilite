@@ -1,6 +1,6 @@
-import Highlight from "./src/index.js";
+import {Hilite} from "./src/index.js";
 
-const HL = new Highlight("#area");
+const HL = new Hilite("#area");
 
 const EL_search = document.querySelector("#search");
 
