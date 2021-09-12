@@ -1,0 +1,25 @@
+{
+  "name": "hilite",
+  "version": "1.0.0",
+  "description": "Highlight text in HTML document",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rokobuljan/hilite.git"
+  },
+  "keywords": [
+    "highlight",
+    "highlighter",
+    "JavaScript",
+    "HTML"
+  ],
+  "author": "Roko C. Buljan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rokobuljan/hilite/issues"
+  },
+  "homepage": "https://github.com/rokobuljan/hilite#readme"
+}
