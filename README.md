@@ -1,25 +1,32 @@
-# Highlight
+# Hilite JS
 
 
-A simple JavaScript class to <mark>highlight</mark> a "search string" inside a HTML markup using the [`<mark>` Element tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark)
+A lightweight JavaScript class to <mark>highlight</mark> words inside a HTML markup using the [`<mark>` Element tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark)
 
-## Use
+## Installation
+
+```sh
+npm i hilite
+```
+
+## Usage
 
 ```js
-import Highlight from ""
+import Hilite from "hilite";
 ```
 
 ## Options
 
-| Property  | Type   | Default       | Description                             |
-| --------- | ------ | ------------- | --------------------------------------- |
-| tag       | String | `"mark"`      | The highlight Element to wrap text with |
-| className | String | `"highlight"` | The class to add to the `tag` Element   |
+| Property    | Type    | Default    | Description                             |
+| ----------- | ------- | ---------- | --------------------------------------- |
+| tag         | String  | `"mark"`   | The highlight Element to wrap text with |
+| className   | String  | `"hilite"` | The class to add to the `tag` Element   |
+| insensitive | Boolean | `true`     | Match case insensitie                   |
 
 ### Options Example:
 
 ```js
-const HL = new Highlight("#area", {
+const HL = new Hilite("#area", {
     tag: "span",
     className: "underline"
 });
@@ -31,7 +38,8 @@ now all "nice" word occurrences inside the `#area` Element will be wrapped into 
 
 ## TODO
 
-- Add option to treat search query as case sensitive
 - Add option to switch from single word highlight to multiple words i.e: `(water|ice|juice)`
-- Add options to customize tag and className
-- Add options to style the highlight (background, color)
+
+## Licence
+
+MIT

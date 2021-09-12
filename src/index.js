@@ -4,11 +4,13 @@ const ELS = (sel, PAR) => (PAR || document).querySelectorAll(sel);
 const ELNew = (tag, prop) => Object.assign(document.createElement(tag), prop);
 const regEscape = (str) => str.replace(/[\.*+?^${}()|[\]\\]/g, "\\$&");
 
-export default class Highlight {
+export default class Hilite {
     constructor(selector, options) {
         Object.assign(this, {
             tag: "mark",
-            className: "highlight",
+            className: "Hilite",
+            insensitive: true,
+            multiple: true,
         }, options, {
             target: EL(selector),
         });
@@ -17,23 +19,25 @@ export default class Highlight {
     highlight(node) {
         if (!node) node = this.target;
         if (node.children?.length) [...node.children].forEach((node) => this.highlight(node));
-        if (node.hasChildNodes()) node.childNodes.forEach((node) => {
-            if (node.nodeType === Node.TEXT_NODE) this.highlight(node);
+        if (node.hasChildNodes()) {
+            [...node.childNodes].reverse().forEach((node) => {
+                if (node.nodeType === 3 && node.nodeValue.trim()) this.highlight(node);
+            });
+        }
+        if (node.nodeType !== 3) return;
+        const matches = [];
+        let match;
+        while ((match = this._reg.exec(node.nodeValue)) !== null) matches.push(match);
+        matches.reverse().forEach(mtc => {
+            const TN_after = node.splitText(mtc.index);
+            const EL_mark = ELNew(this.tag, { textContent: mtc[0], className: this.className });
+            TN_after.nodeValue = TN_after.nodeValue.substring(mtc[0].length);
+            node.parentNode.insertBefore(EL_mark, TN_after);
         });
-        if (node.nodeType !== Node.TEXT_NODE || !node.nodeValue.trim()) return;
-
-        const match = node.nodeValue.match(this._reg);
-        if (!match) return;
-        const TN_after = node.splitText(match.index);
-        const EL_mark = ELNew(this.tag, { textContent: match[0], className: this.className });
-
-        TN_after.nodeValue = TN_after.nodeValue.substring(match[0].length);
-        node.parentNode.insertBefore(EL_mark, TN_after);
-
     }
 
     unhighlight() {
-        const EL_mark = ELS("mark", this.target);
+        const EL_mark = ELS(this.tag, this.target);
         EL_mark.forEach(el => {
             const EL_par = el.parentElement;
             el.replaceWith(el.firstChild);
@@ -49,7 +53,7 @@ export default class Highlight {
         this.unhighlight();
         this._value = v.trim();
         if (!this._value) return;
-        this._reg = new RegExp(regEscape(this._value), "i");
+        this._reg = new RegExp(regEscape(this._value), this.insensitive ? "ig" : "g");
         this.highlight();
     }
 }
