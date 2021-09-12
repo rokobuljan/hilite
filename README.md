@@ -20,7 +20,7 @@ import Hilite from "hilite";
 | Property    | Type    | Default    | Description                             |
 | ----------- | ------- | ---------- | --------------------------------------- |
 | tag         | String  | `"mark"`   | The highlight Element to wrap text with |
-| className   | String  | `"hilite"` | The class to add to the `tag` Element   |
+| className   | String  | `"Hilite"` | The class to add to the `tag` Element   |
 | insensitive | Boolean | `true`     | Match case insensitie                   |
 
 ### Options Example:
