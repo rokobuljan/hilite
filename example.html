@@ -9,12 +9,20 @@
 </head>
 
 <body>
-    <input calus="text" type="search" id="search" placeholder="search" value="text" autocomplete="off" />
+    <input value="text" type="search" id="search" placeholder="search"  autocomplete="off" />
+    <select id="criteria">
+        <option disabled>Select word match criteria: </option>
+        <option value="any" selected>Any</option>
+        <option value="start">Starts with</option>
+        <option value="end">Ends with</option>
+        <option value="full">Full match</option>
+    </select>
+
 
     <div id="area">
-        Simple text
+        Simple text lex 
         <p data-text="some text">
-            Textual and TEXTTT and text text as  another Text text Text text Text text
+            Textual text smalltext te! te tex and TEXTTT and text text as another Text text
 
             Some TEXT text asd<br />
             a text and

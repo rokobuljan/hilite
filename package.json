@@ -11,6 +11,7 @@
     "url": "git+https://github.com/rokobuljan/hilite.git"
   },
   "keywords": [
+    "text",
     "highlight",
     "highlighter",
     "JavaScript",

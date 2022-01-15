@@ -42,11 +42,12 @@ HTML sample:
 
 ## Options
 
-| Property  | Type    | Default    | Description                             |
-| --------- | ------- | ---------- | --------------------------------------- |
-| tag       | String  | `"mark"`   | The highlight Element to wrap text with |
-| className | String  | `"Hilite"` | The class to add to the `tag` Element   |
-| sensitive | Boolean | `false`    | Match case sensitive                    |
+| Property    | Type    | Default    | Description                                                                                                                          |
+| ----------- | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `tag`       | String  | `"mark"`   | The highlight Element to wrap text with                                                                                              |
+| `className` | String  | `"Hilite"` | The class to add to the `tag` Element                                                                                                |
+| `sensitive` | Boolean | `false`    | Match case sensitive                                                                                                                 |
+| `criteria`  | String  | `"any"`    | Characters match criteria <br><br>`"any"` any position  <br> `"start"` starts with  <br> `"end"` ends with  <br> `"full"` full match |
 
 ### Custom Options Example:
 

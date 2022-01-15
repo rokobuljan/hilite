@@ -14,17 +14,18 @@ class Hilite {
             tag: "mark",
             className: "Hilite",
             sensitive: false,
+            criteria: "any", // "any", "start", "end", "full"
         }, options, {
             target: EL(selector),
         });
     }
 
-    highlight(node) {
+    dom_highlight(node) {
         if (!node) node = this.target;
-        if (node.children?.length) [...node.children].forEach((node) => this.highlight(node));
+        if (node.children?.length) [...node.children].forEach((node) => this.dom_highlight(node));
         if (node.hasChildNodes()) {
             [...node.childNodes].reverse().forEach((node) => {
-                if (node.nodeType === 3 && node.nodeValue.trim()) this.highlight(node);
+                if (node.nodeType === 3 && node.nodeValue.trim()) this.dom_highlight(node);
             });
         }
         if (node.nodeType !== 3) return;
@@ -39,7 +40,7 @@ class Hilite {
         });
     }
 
-    unhighlight() {
+    dom_unhighlight() {
         const EL_mark = ELS(this.tag, this.target);
         EL_mark.forEach(el => {
             const EL_par = el.parentElement;
@@ -48,17 +49,41 @@ class Hilite {
         });
     }
 
+    highlight() {
+        this.dom_unhighlight();
+
+        if (!this._value) return;
+
+        const val_escaped = regEscape(this._value);
+        const val_criteria = this._criteria === "any" ? val_escaped : {
+            start: `(?<=^| )${val_escaped}`,
+            end: `${val_escaped}(?=$| )`,
+            full: `(?<=^| )${val_escaped}(?=$| )`,
+        }[this._criteria];
+
+        this._reg = new RegExp(val_criteria, this.sensitive ? "g" : "ig");
+
+        this.dom_highlight();
+    }
+
+    get criteria() {
+        return this._criteria;
+    }
+
+    set criteria(cri) {
+        this._criteria = cri;
+        this.highlight();
+    }
+
     get value() {
         return this._value;
     }
 
-    set value(v) {
-        this.unhighlight();
-        this._value = v.trim();
-        if (!this._value) return;
-        this._reg = new RegExp(regEscape(this._value), this.sensitive ? "g" : "ig");
+    set value(val) {
+        this._value = val.trim();
         this.highlight();
     }
+
 }
 
 export { Hilite }
