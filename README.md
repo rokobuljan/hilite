@@ -12,7 +12,7 @@ npm i @rbuljan/hilite
 ## Syntax
 
 ```js
-new Hilite("selector", {options})
+new Hilite("selector" , options)
 ```
 
 ## Usage
@@ -49,13 +49,16 @@ HTML sample:
 | `sensitive` | Boolean | `false`    | Match case sensitive                                                                                                                 |
 | `criteria`  | String  | `"any"`    | Characters match criteria <br><br>`"any"` any position  <br> `"start"` starts with  <br> `"end"` ends with  <br> `"full"` full match |
 
-### Custom Options Example:
+### Options Example:
+
+To customize Hilite, pass an Object `{}` with the desired options as the second argument: 
 
 ```js
 const HL = new Hilite("#area", {
-    tag: "span",
-    className: "highlighted",
-    sensitive: true,
+    tag: "mark",              // Element tag
+    className: "highlighted", // CSS class
+    sensitive: false,         // false, true
+    criteria: "any",          // "any", "start", "end", "full"
 });
 
 HL.value = "nice";
@@ -63,10 +66,26 @@ HL.value = "nice";
 
 now all "nice" word occurrences inside the `#area` Element will be wrapped into a `<span class="highlighted">`
 
-## Custom style  
+To **remove** the highlight elements use:
+
+```js
+HL.value = "";
+```  
+
+You can also dynamically apply case sensitive and word match criteria like:
+
+```js
+HL.sensitive = true;  // automatically highlight with case sensitive
+HL.criteria = "full"; // automatically highlight by criteria (full match)
+```
+
+***Tip***:  
+see the demo in `example.html` (and `example.js`) for a sample use-case.
+
+## Styles 
 
 The `<mark>` Element will have by default the User Agent Stylesheet applied (light yellow highlight).  
-To customize the style ot the highlighted elements use CSS like:
+To customize the styles ot the highlighted elements use CSS like:
 
 ```css
 .Hilite {
@@ -78,7 +97,8 @@ or use any other class name you defined in the Options `className` property.
 
 ## TODO
 
-- Add option to switch from single word highlight to multiple words i.e: `(water|ice|juice)`
+- Ignore diacritics
+- Add option to switch from single word highlight to multiple words, i.e: `/(water|ice|juice)gi/`
 
 ## Licence
 

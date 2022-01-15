@@ -34,7 +34,11 @@ class Hilite {
         while ((match = this._reg.exec(node.nodeValue)) !== null) matches.push(match);
         matches.reverse().forEach(mtc => {
             const TN_after = node.splitText(mtc.index);
-            const EL_mark = ELNew(this.tag, { textContent: mtc[0], className: this.className });
+            const EL_mark = ELNew(this.tag, {
+                textContent: mtc[0],
+                className: this.className,
+                tabIndex: 0
+            });
             TN_after.nodeValue = TN_after.nodeValue.substring(mtc[0].length);
             node.parentNode.insertBefore(EL_mark, TN_after);
         });
@@ -55,7 +59,8 @@ class Hilite {
         if (!this._value) return;
 
         const val_escaped = regEscape(this._value);
-        const val_criteria = this._criteria === "any" ? val_escaped : {
+        const val_criteria = {
+            any: val_escaped,
             start: `(?<=^| )${val_escaped}`,
             end: `${val_escaped}(?=$| )`,
             full: `(?<=^| )${val_escaped}(?=$| )`,
@@ -84,6 +89,14 @@ class Hilite {
         this.highlight();
     }
 
+    get sensitive() {
+        return this._sensitive;
+    }
+
+    set sensitive(bool) {
+        this._sensitive = bool;
+        this.highlight();
+    }
 }
 
 export { Hilite }
